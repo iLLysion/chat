@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: chat_development
+  database: chat_dev
+  username: chat
+  password: <%= ENV["CHAT_DATABASE_PASSWORD"] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
