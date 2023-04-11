@@ -5,7 +5,7 @@
     <div class="basis-7/12"><%= message.body %></div>
     <div class="basis-1/12">
       <%= link_to like_message_path(message), data: { "turbo-method": :post } do %>
-        <%= render partial: "messages/like", locals: { message: message, user: user } %>
+        <%= render partial: "messages/like", locals: { user: user, message: message } %>
         <%= render partial: "messages/likes_count", locals: { message: message } %>
       <% end %>
     </div>

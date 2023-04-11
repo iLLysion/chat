@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def create
-    @new_message = current_user&.messages&.build(message_params)
+    @new_message = current_user.messages.build(message_params)
 
     if @new_message.save
       room = @new_message.room
@@ -23,9 +23,10 @@ class MessagesController < ApplicationController
     end
 
     room = @message.room
+
     @message.broadcast_replace_to(
       [current_user, room],
-      target: "message_#{@message.id}_likes",
+      target: "message_#{@message.id}_like",
       partial: "messages/like",
       locals: { user: current_user, message: @message.decorate }
     )
@@ -34,7 +35,7 @@ class MessagesController < ApplicationController
       room,
       target: "message_#{@message.id}_likes_count",
       partial: "messages/likes_count",
-      locals: { user: current_user, message: @message }
+      locals: { message: @message.decorate }
     )
   end
 
